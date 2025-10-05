@@ -1,0 +1,6 @@
+
+@import "./theme.css";
+
+html, body, #__next { height: 100%; }
+* { box-sizing: border-box; }
+a { color: inherit; }

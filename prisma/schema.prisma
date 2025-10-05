@@ -1,0 +1,56 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("postgresql://neondb_owner:npg_GnEQxWleY24m@ep-polished-mud-advmeem9-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require")
+}
+
+model Tag {
+  id        String     @id
+  name      String
+  createdAt DateTime   @default(now())
+  locations Location[]
+  posts     Post[]
+  invites   Invite[]
+}
+
+model Location {
+  id        String   @id @default(cuid())
+  tagId     String
+  lat       Float
+  lng       Float
+  timestamp DateTime  @default(now())
+  Tag       Tag       @relation(fields: [tagId], references: [id], onDelete: Cascade)
+}
+
+model Post {
+  id          String   @id @default(cuid())
+  tagId       String
+  title       String
+  body        String
+  lat         Float
+  lng         Float
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  Tag         Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+}
+
+model Invite {
+  id        String     @id @default(cuid())
+  tagId     String
+  code      String     @unique
+  createdAt DateTime   @default(now())
+  Tag       Tag        @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  followers Follower[]
+}
+
+model Follower {
+  id        String   @id @default(cuid())
+  inviteId  String
+  email     String
+  createdAt DateTime @default(now())
+  Invite    Invite   @relation(fields: [inviteId], references: [id], onDelete: Cascade)
+}
