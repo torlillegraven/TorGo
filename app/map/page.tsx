@@ -1,15 +1,14 @@
-
 "use client";
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import LeafletStyles from "./leaflet.css";
 
-const MapContainer = dynamic(() => import("react-leaflet").then(m => m.MapContainer), { ssr: false });
-const TileLayer = dynamic(() => import("react-leaflet").then(m => m.TileLayer), { ssr: false });
-const Marker = dynamic(() => import("react-leaflet").then(m => m.Marker), { ssr: false });
-const Polyline = dynamic(() => import("react-leaflet").then(m => m.Polyline), { ssr: false });
-const Popup = dynamic(() => import("react-leaflet").then(m => m.Popup), { ssr: false });
+const MapContainer: any = dynamic(() => import("react-leaflet").then(m => m.MapContainer), { ssr: false });
+const TileLayer: any = dynamic(() => import("react-leaflet").then(m => m.TileLayer), { ssr: false });
+const Marker: any = dynamic(() => import("react-leaflet").then(m => m.Marker), { ssr: false });
+const Polyline: any = dynamic(() => import("react-leaflet").then(m => m.Polyline), { ssr: false });
+const Popup: any = dynamic(() => import("react-leaflet").then(m => m.Popup), { ssr: false });
 
 type Loc = { lat: number; lng: number; timestamp: string };
 type Post = { id: string; title: string; lat: number; lng: number; imageUrl?: string | null };
@@ -48,7 +47,9 @@ export default function MapPage() {
     return () => { cancelled = true; };
   }, [tagId]);
 
-  const center = locs.length ? [locs[locs.length - 1].lat, locs[locs.length - 1].lng] as [number, number] : [20, 0];
+  const center: [number, number] = locs.length
+    ? [locs[locs.length - 1].lat, locs[locs.length - 1].lng]
+    : [20, 0];
 
   return (
     <main className="grid">
