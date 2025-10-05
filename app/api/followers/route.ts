@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/prisma";
 
 export async function GET() {
+  // Health check endpoint (prevents Next from failing collection)
   return NextResponse.json({ ok: true });
 }
 

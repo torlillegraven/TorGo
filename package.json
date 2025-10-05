@@ -9,7 +9,8 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev --name init",
     "db:reset": "rm -f prisma/dev.db && npm run prisma:migrate",
-    "share": "concurrently -k -n app,tunnel -c blue,magenta \"next dev -p 3010 -H 0.0.0.0\" \"lt --port 3010 --basic-auth teddy:travel123\""
+    "share": "concurrently -k -n app,tunnel -c blue,magenta \"next dev -p 3010 -H 0.0.0.0\" \"lt --port 3010 --basic-auth teddy:travel123\"",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "5.18.0",
